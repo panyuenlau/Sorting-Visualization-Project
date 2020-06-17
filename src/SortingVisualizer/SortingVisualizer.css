@@ -1,0 +1,37 @@
+#root {
+    min-height: 100vh;
+    min-width: 100vw;;
+}
+
+.array-container {
+    position: absolute;
+    width: 100%;
+    margin: 1em 0 1em 0;
+}
+
+.array-container h1 {
+    color: #b30086
+}
+
+
+.buttons {
+    margin: 25px 50px 150px 100px;
+}
+
+.array-bar-container{
+    display: flex;
+    /* flex-wrap: nowrap; */
+    align-items: flex-end;
+    position: fixed;
+    bottom: 50px;
+    right: 1vw;
+    left: 20px;
+    justify-content: center;
+}
+
+.array-bar {
+    background-color: #ff9800;
+    display: inline-block;
+    margin: 0 1px;
+    width: 0.5vw;
+}
