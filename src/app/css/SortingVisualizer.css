@@ -4,9 +4,14 @@
 }
 
 .array-container {
-    position: absolute;
+    position: fixed;
     width: 100%;
     margin: 1em 0 1em 0;
+    height: 100%;
+}
+
+.top-container {
+    margin-top: 1em;
 }
 
 .array-container h1 {
@@ -15,12 +20,20 @@
 
 
 .buttons {
-    margin: 25px 50px 150px 100px;
+    margin: 25px 0 0 0;
+    display: inline-flex;
+}
+
+div.buttons > * {
+    margin-right: 5px;
+}
+
+.newArrayButton {
+    width: 50%;
 }
 
 .array-bar-container{
     display: flex;
-    /* flex-wrap: nowrap; */
     align-items: flex-end;
     position: fixed;
     bottom: 50px;
@@ -37,5 +50,9 @@
 }
 
 .slider {
-    width: 20%;
+    margin-top: 2em;
+}
+
+div.slider-container{
+    overflow-y: visible;
 }

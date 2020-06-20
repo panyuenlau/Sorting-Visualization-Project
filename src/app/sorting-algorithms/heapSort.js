@@ -1,6 +1,6 @@
 //Runtime: O(Nlog(N))
 
-import {swap} from './swapHelper';
+import {swap} from '../helper-functions/swap';
 
 export const HeapSortAnimations = (array) => {
     const animations = [];

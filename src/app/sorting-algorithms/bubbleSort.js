@@ -1,5 +1,6 @@
 // Runtime: O(N^2)
-import {swap} from './swapHelper.js';
+
+import {swap} from '../helper-functions/swap';
 
 export const BubbleSortAnimations = (array) => {
     const animations = [];

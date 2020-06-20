@@ -1,6 +1,6 @@
 // Runtime: O(NlogN)
 
-import {swap} from './swapHelper';
+import {swap} from '../helper-functions/swap';
 
 // Driver code
 export const QuickSortAnimations = (array) => {
