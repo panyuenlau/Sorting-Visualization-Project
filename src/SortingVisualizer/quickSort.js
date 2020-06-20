@@ -9,7 +9,6 @@ export const QuickSortAnimations = (array) => {
 
     quickSort(array, animations, 0, array.length - 1);
 
-    console.log(animations);
     return animations;
 }
 
@@ -33,37 +32,23 @@ function partition(array, animations, low, high) {
     let pivot = array[high];
     let i = low - 1;
 
-    // store the pivot position into animations array
-    // animations.push([high, high]);
-    // animations.push([high, high]);
-
     for(let j = low; j < high; j++) {
         // we are comparing index j with pivot
-        animations.push([j, high]);
-        animations.push([j, high]);
+        animations.push(['compare1', j, high]);
+        animations.push(['compare2', j, high]);
 
         if(array[j] < pivot) {
             i++;
-            animations.push([j, array[i]]);
-            animations.push([i, array[j]]);
+            animations.push(['swap', j, array[i]]);
+            animations.push(['swap', i, array[j]]);
 
             // swap arr[i] and arr[j]
             swap(array, i, j);
-        } else {
-            animations.push([-1, -1]);
-            animations.push([-1, -1]);
         }
-        animations.push([-1, -1]);
-        animations.push([-1, -1]);
     }
 
-    animations.push([-1, -1]);
-    animations.push([-1, -1]);
-    animations.push([-1, -1]);
-    animations.push([-1, -1]);
-
-    animations.push([i+1, array[high]]);
-    animations.push([high, array[i + 1]]);
+    animations.push(['swap', i+1, array[high]]);
+    animations.push(['swap', high, array[i + 1]]);
 
     // swap arr[i+1] and pivot so that pivot is placed in the currect position
     swap(array, i + 1, high)

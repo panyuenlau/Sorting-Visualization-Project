@@ -1,6 +1,8 @@
+// Runtime: O（NlogN)
+
 export const MergeSortAnimations = (array) => {
     const animations = [];
-    if (array.length <= 1) return array;
+    if (array.length <= 1) return animations;
     const auxiliaryArray = array.slice(); // shallow copy of original array
     mergeSortHelper(array, 0, array.length - 1, auxiliaryArray, animations);
     return animations;
@@ -24,40 +26,38 @@ function merge(originalArray, start, middle, end, auxiliaryArray, animations) {
     let i = start;
     let j = middle + 1;
 
-    // console.log("initial: ", start, middle, end);
-
     while(i <= middle && j <= end) {
         // these are the values that are being compared, push them once to change their color
-        animations.push([i, j]);
+        animations.push(['compare1', i, j]);
         // push them second time to revert their color
-        animations.push([i, j]);
-
-        console.log(i, j);
+        animations.push(['compare2', i, j]);
 
         if(auxiliaryArray[i] <= auxiliaryArray[j]) {
-            animations.push([k, auxiliaryArray[i], j, auxiliaryArray[j]]);
+            animations.push(['swap', k, auxiliaryArray[i]]);
             originalArray[k++] = auxiliaryArray[i++];
         } else {
-            animations.push([k, auxiliaryArray[j], j, auxiliaryArray[i]])
+            animations.push(['swap', k, auxiliaryArray[j]]);
             originalArray[k++] = auxiliaryArray[j++];
         }
     }
 
     // add the remaining elements in the first interval
     while (i <= middle) {
-        animations.push([i, i]);
-        animations.push([i, i]);
+        animations.push(['compare1', i, i]);
+        animations.push(['compare2', i, i]);
+        animations.push(['swap', k, auxiliaryArray[i]]);
 
-        animations.push([k, auxiliaryArray[i], k, auxiliaryArray[i]]);
+        // overwrite the value at index k with value at index i
         originalArray[k++] = auxiliaryArray[i++];
     }
 
     // add the remaining elements in the second interval
     while (j <= end) {
-        animations.push([j, j]);
-        animations.push([j, j]);
+        animations.push(['compare1', j, j]);
+        animations.push(['compare2', j, j]);
 
-        animations.push([k, auxiliaryArray[j], k, auxiliaryArray[j]]);
+        animations.push(['swap', k, auxiliaryArray[j]]);
+
         originalArray[k++] = auxiliaryArray[j++];
     }
 }
