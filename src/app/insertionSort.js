@@ -1,6 +1,6 @@
 //Runtime: O(N^2)
 
-import {swap} from './swapHelper.js';
+import {swap} from './swapHelper';
 
 export const InsertionSortAnimations = (array) => {
     const animations = [];

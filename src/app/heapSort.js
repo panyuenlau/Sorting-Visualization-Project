@@ -1,6 +1,6 @@
 //Runtime: O(Nlog(N))
 
-import {swap} from './swapHelper.js';
+import {swap} from './swapHelper';
 
 export const HeapSortAnimations = (array) => {
     const animations = [];
@@ -46,7 +46,7 @@ function heapify(array, n, i) {
         largest = r;
     
     // if the largest is not root
-    if (largest != i) {
+    if (largest !== i) {
 
         swap(array, i, largest);
 
@@ -80,7 +80,7 @@ function heapifyWithAnimation(array, n, i, animations) {
     }
 
     // if the largest is not root
-    if (largest != i) {
+    if (largest !== i) {
         animations.push(['swap', i, array[largest]]);
         animations.push(['swap', largest, array[i]]);
 

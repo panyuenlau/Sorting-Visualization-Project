@@ -1,7 +1,6 @@
 import React from 'react';
-import './SortingVisualizer.css';
+import './css/SortingVisualizer.css';
 import {Button, Slider} from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
 import {MergeSortAnimations} from './mergeSort';
 import {BubbleSortAnimations} from './bubbleSort';
 import {QuickSortAnimations } from './quickSort';
@@ -58,7 +57,7 @@ export default class SortingVisualizer extends React.Component {
 
             if(isComparing) {
                 const color = (animations[i][0] === 'compare1') ? COMPARING_COLOR : ORIGINAL_COLOR;
-                const [_, barOneInx, barTwoInx] = animations[i];
+                const [, barOneInx, barTwoInx] = animations[i];
 
                 if(barOneInx === -1) continue;
 
@@ -73,7 +72,7 @@ export default class SortingVisualizer extends React.Component {
                 }, i * this.state.animation_speed)
             } else {
                 setTimeout(() => {
-                    const [_, barInx, barHeight] = animations[i];
+                    const [, barInx, barHeight] = animations[i];
                     
                     // console.log(barInx, barHeight);
 
@@ -133,7 +132,7 @@ export default class SortingVisualizer extends React.Component {
     }
 
     render() {
-        const {array, animation_speed} = this.state;
+        const {animation_speed} = this.state;
 
         return (
             <div className="array-container">
