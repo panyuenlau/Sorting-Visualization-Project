@@ -1,58 +1,57 @@
 #root {
-    min-height: 100vh;
-    min-width: 100vw;;
+  min-height: 100vh;
+  min-width: 100vw;
 }
 
 .array-container {
-    position: fixed;
-    width: 100%;
-    margin: 1em 0 1em 0;
-    height: 100%;
+  position: fixed;
+  width: 100%;
+  margin: 1em 0 1em 0;
+  height: 100%;
 }
 
 .top-container {
-    margin-top: 1em;
+  margin-top: 1em;
 }
 
 .array-container h1 {
-    color: #b30086
+  color: #b30086;
 }
 
-
 .buttons {
-    margin: 25px 0 0 0;
-    display: inline-flex;
+  margin: 25px 0 0 0;
+  display: inline-flex;
 }
 
 div.buttons > * {
-    margin-right: 5px;
+  margin-right: 5px;
 }
 
 .newArrayButton {
-    width: 50%;
+  width: 50%;
 }
 
-.array-bar-container{
-    display: flex;
-    align-items: flex-end;
-    position: fixed;
-    bottom: 50px;
-    right: 1vw;
-    left: 20px;
-    justify-content: center;
+.array-bar-container {
+  display: flex;
+  align-items: flex-end;
+  position: fixed;
+  bottom: 50px;
+  right: 1vw;
+  left: 20px;
+  justify-content: center;
 }
 
 .array-bar {
-    background-color: #ff9800;
-    display: inline-block;
-    margin: 0 1px;
-    width: 0.5vw;
+  background-color: #ff9800;
+  display: inline-block;
+  margin: 0 1px;
+  width: 0.5vw;
 }
 
 .slider {
-    margin-top: 2em;
+  margin-top: 2em;
 }
 
-div.slider-container{
-    overflow-y: visible;
+div.slider-container {
+  overflow-y: visible;
 }
