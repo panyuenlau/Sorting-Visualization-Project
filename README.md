@@ -31,9 +31,6 @@ It correctly bundles React in production mode and optimizes the build for the be
 The build is minified and the filenames include the hashes.<br>
 Your app is ready to be deployed!
 
-See the section about [deployment](#deployment) for more information.
-
-
 ## To check out more details on each sorting algorithm:
 * [Bubble Sort](https://en.wikipedia.org/wiki/Bubble_sort)
 * [Merge Sort](https://en.wikipedia.org/wiki/Merge_sort)
