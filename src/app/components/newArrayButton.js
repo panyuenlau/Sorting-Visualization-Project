@@ -47,7 +47,7 @@ export default class NewArrayButton extends Component {
 
         return (
             <div>
-                <Button variant="outlined" color="secondary" onClick={()=>this.handleClickOpen()}> New Array </Button>
+                <Button variant="contained" color="secondary" onClick={()=>this.handleClickOpen()}> New Array </Button>
 
                 <Dialog fullWidth={true} maxWidth={maxWidth} open={open} onClose={()=>this.handleClose()}>
                     <DialogTitle>{"New Array Size"}</DialogTitle>
