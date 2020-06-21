@@ -3,8 +3,10 @@
 import {swap} from '../helper-functions/swap';
 
 // Driver code
-export const QuickSortAnimations = (array) => {
+export const QuickSortAnimations = (values) => {
     const animations = [];
+    const array = [...values]
+
     if (array.length <= 1) return animations;
 
     quickSort(array, animations, 0, array.length - 1);

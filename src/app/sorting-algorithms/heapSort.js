@@ -2,8 +2,10 @@
 
 import {swap} from '../helper-functions/swap';
 
-export const HeapSortAnimations = (array) => {
+export const HeapSortAnimations = (values) => {
     const animations = [];
+    const array = [...values];
+    
     let N = array.length;
 
     // build max heap

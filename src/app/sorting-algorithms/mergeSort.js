@@ -1,9 +1,12 @@
 // Runtime: O（NlogN)
 
-export const MergeSortAnimations = (array) => {
+export const MergeSortAnimations = (values) => {
     const animations = [];
-    if (array.length <= 1) return animations;
-    const auxiliaryArray = array.slice(); // shallow copy of original array
+    const array = [...values];
+    const auxiliaryArray = [...values]; // shallow copy of original arra
+
+    if (values.length <= 1) return animations;
+    
     mergeSortHelper(array, 0, array.length - 1, auxiliaryArray, animations);
     return animations;
 }

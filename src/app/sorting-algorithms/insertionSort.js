@@ -2,8 +2,9 @@
 
 import {swap} from '../helper-functions/swap';
 
-export const InsertionSortAnimations = (array) => {
+export const InsertionSortAnimations = (values) => {
     const animations = [];
+    const array = [...values]
 
     for(let i = 0; i < array.length - 1; i++) {
         // Find the minimum element in the unsorted portion

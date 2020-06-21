@@ -137,7 +137,6 @@ export default class SortingVisualizer extends React.Component {
 
     mergeSort() {
         const animations = MergeSortAnimations(this.state.array);
-
         this.playAnimations(animations);
     }
 
@@ -148,6 +147,7 @@ export default class SortingVisualizer extends React.Component {
     }
 
     quickSort() {
+        // this.forceUpdate();
         const animations = QuickSortAnimations(this.state.array);
 
         this.playAnimations(animations);
@@ -179,7 +179,7 @@ export default class SortingVisualizer extends React.Component {
 
     render() {
         const {animationSpeed} = this.state;
-
+        console.log(animationSpeed);
         return (
             <div className="array-container">
 
@@ -200,7 +200,7 @@ export default class SortingVisualizer extends React.Component {
 
                     <div className="slider">
                         <div> Sorting Speed </div>
-                        <SliderBar marks={marks} valueLabelDisplay="auto" value={this.state.animationSpeed} onChange={this.handleSliderChange} max = {MAX_ANIMATION_MS} aria-labelledby="continuous-slider"/>
+                        <SliderBar marks={marks} valueLabelDisplay="auto" value={animationSpeed} onChange={this.handleSliderChange} max = {MAX_ANIMATION_MS} aria-labelledby="continuous-slider"/>
                     </div>
                 </div>
 
