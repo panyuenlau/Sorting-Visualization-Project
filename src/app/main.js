@@ -27,6 +27,9 @@ const marks = [
     },
 ]
 
+
+let timerIds = [];
+
 function randomIntGenerator(min, max){
     return Math.floor(Math.random() * (max - min + 1) + min);
 };
@@ -34,11 +37,13 @@ function randomIntGenerator(min, max){
 export default class SortingVisualizer extends React.Component {
     constructor(props) {
         super(props);
+        
+        // this.animationSpeed = 50;
 
         this.state = {
             array: [],
-            array_size: 100,
-            animation_speed: 50,
+            arraySize: 100,
+            animationSpeed: 50,
         };
 
         this.changeArraySize = this.changeArraySize.bind(this);
@@ -50,20 +55,39 @@ export default class SortingVisualizer extends React.Component {
             The componentDidMount() method runs 
             after the component output has been rendered to the DOM.
         */
-        this.resetArray();
+        this.setArrayWhenFirstLoad();
     }
 
-    resetArray() {
+    setArrayWhenFirstLoad() {
         const array = [];
-        for(let i = 0; i < this.state.array_size; i++) {
+
+        for(let i = 0; i < this.state.arraySize; i++) {
             array.push(randomIntGenerator(10, 600));
         }
         this.setState({array: array});
     }
 
+    clearAllTimeouts(){
+        timerIds.forEach(function(id) {
+            clearTimeout(id);
+        })
+    }
+
+    resetArray() {
+        const array = [];
+
+        for(let i = 0; i < this.state.arraySize; i++) {
+            array.push(randomIntGenerator(10, 600));
+        }
+        this.setState({array: array});
+        
+        this.clearAllTimeouts();
+    }
+
     changeArraySize = (event, value) => {
+
         this.setState({
-            array_size: value
+            arraySize: value
         })
     }
 
@@ -84,32 +108,32 @@ export default class SortingVisualizer extends React.Component {
         for(let i = 0; i < animations.length; i++) {
             const arrayBars = document.getElementsByClassName('array-bar');
             const isComparing = (animations[i][0] === 'compare1' || animations[i][0] === 'compare2');
-
             if(isComparing) {
                 const color = (animations[i][0] === 'compare1') ? COMPARING_COLOR : ORIGINAL_COLOR;
-                const [, barOneInx, barTwoInx] = animations[i];
 
-                if(barOneInx === -1) continue;
+                const [, barOneInx, barTwoInx] = animations[i];
 
                 const barOneStyle = arrayBars[barOneInx].style;
                 const barTwoStyle = arrayBars[barTwoInx].style;
                 
-                setTimeout(() => {
+                let t = setTimeout(() => {
                     barOneStyle.backgroundColor = color;
                     barTwoStyle.backgroundColor = color;
-                }, i * (MAX_ANIMATION_MS + 1 - this.state.animation_speed))
+                }, i * (MAX_ANIMATION_MS + 1 - this.state.animationSpeed))
+                timerIds.push(t);
+
             } else {
-                setTimeout(() => {
+                let t = setTimeout(() => {
                     const [, barInx, barHeight] = animations[i];
                     
                     const barStyle = arrayBars[barInx].style;
                     barStyle.height = `${barHeight *0.1}vh`; 
 
-                }, i * (MAX_ANIMATION_MS + 1 - this.state.animation_speed));
+                }, i * (MAX_ANIMATION_MS + 1 - this.state.animationSpeed));
+                timerIds.push(t);
             }
         }
     }
-
 
     mergeSort() {
         const animations = MergeSortAnimations(this.state.array);
@@ -150,11 +174,11 @@ export default class SortingVisualizer extends React.Component {
     */
 
    handleSliderChange = (event, value) => {
-        this.setState({animation_speed: value});
+        this.setState({animationSpeed: value});
     }
 
     render() {
-        const {animation_speed} = this.state;
+        const {animationSpeed} = this.state;
 
         return (
             <div className="array-container">
@@ -163,7 +187,7 @@ export default class SortingVisualizer extends React.Component {
                     <h1>Welcome to My Sorting Visualizer!</h1>
                                     
                     <div className="buttons">
-                        <NewArrayButton value = {this.state.array_size} className="newAarryButton" setArraySize={this.changeArraySize} resetArray={this.resetArray} />
+                        <NewArrayButton value = {this.state.arraySize} className="newAarryButton" setArraySize={this.changeArraySize} resetArray={this.resetArray} />
                         
                         {/* <Button variant="outlined" color="secondary" onClick={()=> this.resetArrayForm()}>New Array</Button> {' '} */}
                         {/* <Button variant="outline-danger" onClick={()=>this.stopSorting()}>Stop</Button> {' '} */}
@@ -176,7 +200,7 @@ export default class SortingVisualizer extends React.Component {
 
                     <div className="slider">
                         <div> Sorting Speed </div>
-                        <SliderBar marks={marks} valueLabelDisplay="auto" value={animation_speed} onChange={this.handleSliderChange} max = {MAX_ANIMATION_MS} aria-labelledby="continuous-slider"/>
+                        <SliderBar marks={marks} valueLabelDisplay="auto" value={this.state.animationSpeed} onChange={this.handleSliderChange} max = {MAX_ANIMATION_MS} aria-labelledby="continuous-slider"/>
                     </div>
                 </div>
 
