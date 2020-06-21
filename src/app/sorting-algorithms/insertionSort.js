@@ -25,5 +25,5 @@ export const InsertionSortAnimations = (values) => {
         swap(array, mind_inx, i);
     }
 
-    return animations;
+    return [animations, array];
 }

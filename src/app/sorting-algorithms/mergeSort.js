@@ -8,7 +8,7 @@ export const MergeSortAnimations = (values) => {
     if (values.length <= 1) return animations;
     
     mergeSortHelper(array, 0, array.length - 1, auxiliaryArray, animations);
-    return animations;
+    return [animations, array];
 }
 
 function mergeSortHelper(originalArray, start, end, auxiliaryArray, animations) {

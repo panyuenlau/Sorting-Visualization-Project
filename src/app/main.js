@@ -7,15 +7,19 @@ import {InsertionSortAnimations} from './sorting-algorithms/insertionSort';
 import {HeapSortAnimations} from './sorting-algorithms/heapSort';
 import {SliderBar} from './components/sliderBar';
 import NewArrayButton from './components/newArrayButton';
+import {playAnimations} from './helper-functions/playAnimation';
 import './css/SortingVisualizer.css';
 
 
 // Some params
 const ORIGINAL_COLOR = '#00bcd4';
 const COMPARING_COLOR = 'red';
+const SORTED_COLOR = '#4EC83E';
+
 const MAX_ANIMATION_MS = 100;
 
-// Parameter used for the slider
+
+// Parameter used for the sorting speed slider
 const marks = [
     {
         value: 0,
@@ -47,6 +51,7 @@ export default class SortingVisualizer extends React.Component {
 
         this.changeArraySize = this.changeArraySize.bind(this);
         this.resetArray = this.resetArray.bind(this);
+        this.enableAllButtons = this.enableAllButtons.bind(this);
     }
     
     componentDidMount() {
@@ -72,99 +77,75 @@ export default class SortingVisualizer extends React.Component {
         })
     }
 
-    resetArray() {
-        const array = [];
-
-        for(let i = 0; i < this.state.arraySize; i++) {
-            array.push(randomIntGenerator(10, 600));
-        }
-        this.setState({array: array});
-        
-        // To clear the current animations
-        this.clearAllTimeouts();
-    }
-
     changeArraySize = (event, value) => {
         this.setState({
             arraySize: value
         })
     }
 
-    /* TODO: update color after the sorting is finished
+    resetArray() {
+        const array = [];
+
+        for(let i = 0; i < this.state.arraySize; i++) {
+            array.push(randomIntGenerator(10, 600));
+        }
+        this.setState({
+            array: array,
+            disableButtons: false,
+        });
+        
+        // To clear the current animations
+        this.clearAllTimeouts();
+    }
+
     updateColor() {
         const barContainer = document.getElementsByClassName('array-bar');
         for(let i = 0; i < barContainer.length; i++) {
-            barContainer[i].style.backgroundColor = 'black';
+            barContainer[i].style.backgroundColor = SORTED_COLOR;
         }
     }
-    */
     
-    playAnimations(animations) {
-        for(let i = 0; i < animations.length; i++) {
-            const arrayBars = document.getElementsByClassName('array-bar');
-            const isComparing = (animations[i][0] === 'compare1' || animations[i][0] === 'compare2');
-            
-            if(isComparing) {
-                const color = (animations[i][0] === 'compare1') ? COMPARING_COLOR : ORIGINAL_COLOR;
-
-                const [, barOneInx, barTwoInx] = animations[i];
-
-                const barOneStyle = arrayBars[barOneInx].style;
-                const barTwoStyle = arrayBars[barTwoInx].style;
-                
-                let t = setTimeout(() => {
-                    barOneStyle.backgroundColor = color;
-                    barTwoStyle.backgroundColor = color;
-                }, i * (MAX_ANIMATION_MS + 1 - this.state.animationSpeed))
-                
-                this.timerIds.push(t);
-            } else {
-                let t = setTimeout(() => {
-                    const [, barInx, barHeight] = animations[i];
-                    
-                    const barStyle = arrayBars[barInx].style;
-                    barStyle.height = `${barHeight *0.1}vh`; 
-
-                }, i * (MAX_ANIMATION_MS + 1 - this.state.animationSpeed));
-
-                this.timerIds.push(t);
-            }
-        }
+   disableAllButtons(){
+        this.setState({disableButtons: true});
     }
 
-    disableAllButtons(){
-        this.setState({disableButtons: true});
+    enableAllButtons(sortedArray) {
+        this.setState({
+            disableButtons: false, 
+            array: sortedArray
+        });
+        this.updateColor();
     }
 
     doSort(sortAlgo) {
         this.disableAllButtons();
         
         let animations = [];
+        let sortedArray = [];
         
         switch(sortAlgo) {
             case 'mergesort':
-                animations = MergeSortAnimations(this.state.array);
+                [animations, sortedArray] = MergeSortAnimations(this.state.array);
                 break;
             case 'quicksort':
-                animations = QuickSortAnimations(this.state.array);
+                [animations, sortedArray] = QuickSortAnimations(this.state.array);
                 break;
             case 'heapsort':
-                animations = HeapSortAnimations(this.state.array);
+                [animations, sortedArray] = HeapSortAnimations(this.state.array);
                 break;
             case 'bubblesort':
-                animations = BubbleSortAnimations(this.state.array);
+                [animations, sortedArray] = BubbleSortAnimations(this.state.array);
                 break;
             case 'insertionsort':
-                animations = InsertionSortAnimations(this.state.array);
+                [animations, sortedArray] = InsertionSortAnimations(this.state.array);
                 break;
             default:
-                animations = [];
                 break;
         }
         
         // Need to add a short timeout here in order to change the bar color successfully
         setTimeout(()=>{
-            this.playAnimations(animations);
+            playAnimations(animations, sortedArray, this.enableAllButtons, this.state.animationSpeed, this.timerIds);
         }, 10)
     }
 
@@ -193,7 +174,7 @@ export default class SortingVisualizer extends React.Component {
 
                     <div className="slider">
                         <div> Sorting Speed </div>
-                        <SliderBar marks={marks} valueLabelDisplay="auto" value={animationSpeed} onChange={this.handleSliderChange} max = {MAX_ANIMATION_MS} aria-labelledby="continuous-slider"/>
+                        <SliderBar disabled={disableButtons} marks={marks} valueLabelDisplay="auto" value={animationSpeed} onChange={this.handleSliderChange} max = {MAX_ANIMATION_MS} aria-labelledby="continuous-slider"/>
                     </div>
                 </div>
 

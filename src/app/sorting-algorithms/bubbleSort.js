@@ -20,6 +20,5 @@ export const BubbleSortAnimations = (values) => {
             }
         }
     }
-    console.log(values);
-    return animations;
+    return [animations, array];
 }

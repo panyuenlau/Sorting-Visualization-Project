@@ -11,7 +11,7 @@ export const QuickSortAnimations = (values) => {
 
     quickSort(array, animations, 0, array.length - 1);
 
-    return animations;
+    return [animations, array];
 }
 
 

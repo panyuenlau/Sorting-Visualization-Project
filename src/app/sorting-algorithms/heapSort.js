@@ -24,7 +24,7 @@ export const HeapSortAnimations = (values) => {
         heapifyWithAnimation(array, i, 0, animations);
     }
 
-    return animations;
+    return [animations, array];
 }
 
 
