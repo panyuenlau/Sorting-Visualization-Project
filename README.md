@@ -4,7 +4,7 @@ The goal of this application is to visualize several fundamental sorting algorit
 
 To see the application in action: https://panyuenlau.github.io/Sorting-Visualization-Project/
 
-It would be greatly appreciated if you give give a star to my project or let me know what can be improved.
+It would be greatly appreciated if you can give a star to my project or let me know what can be improved.
 
 ## Available Scripts
 
