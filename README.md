@@ -4,6 +4,7 @@ The goal of this application is to visualize several fundamental sorting algorit
 
 To see the application in action: https://panyuenlau.github.io/Sorting-Visualization-Project/
 
+It would be greatly appreciated if you can give a star to my project or let me know what can be improved.
 
 ## Available Scripts
 
@@ -27,12 +28,6 @@ See the section about [running tests](#running-tests) for more information.
 
 Builds the app for production to the `build` folder.<br>
 It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
-
-See the section about [deployment](#deployment) for more information.
-
 
 ## To check out more details on each sorting algorithm:
 * [Bubble Sort](https://en.wikipedia.org/wiki/Bubble_sort)
