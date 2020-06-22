@@ -9,7 +9,7 @@ export const HeapSortAnimations = (values) => {
   let N = array.length;
 
   // build max heap
-  for (let i = N / 2 - 1; i >= 0; i--) heapify(array, N, i);
+  for (let i = Math.floor(N / 2); i >= 0; i--) heapify(array, N, i);
 
   // one by one extract an element from heap
   for (let i = N - 1; i > 0; i--) {
@@ -35,24 +35,21 @@ function heapify(array, n, i) {
   let r = 2 * i + 2;
 
   // if left child > root
-  if (l < n && array[l] > array[largest]) {
+  if (l < n && array[l] > array[i]) {
     largest = l;
   }
 
-  // if left child > largest so far
+  // If right child > largest so far
   if (r < n && array[r] > array[largest]) largest = r;
 
-  // if the largest is not root
+  // If root is not largest, swap with largest and continue heapifying
   if (largest !== i) {
     swap(array, i, largest);
 
-    // recursively heapify the subtree
     heapify(array, n, largest);
   }
 }
 
-// to heapify a subtree rooted with node i which is an index in array[]
-// n is size of the heap
 function heapifyWithAnimation(array, n, i, animations) {
   // Find largest among root, left child and right child
   let largest = i;
@@ -67,10 +64,11 @@ function heapifyWithAnimation(array, n, i, animations) {
     largest = l;
   }
 
-  // if left child > largest so far
+  // if right child > largest so far
   if (r < n && array[r] > array[largest]) {
     animations.push(["compare1", r, largest]);
     animations.push(["compare2", r, largest]);
+
     largest = r;
   }
 
@@ -82,6 +80,6 @@ function heapifyWithAnimation(array, n, i, animations) {
     swap(array, i, largest);
 
     // recursively heapify the subtree
-    heapify(array, n, largest);
+    heapifyWithAnimation(array, n, largest, animations);
   }
 }

@@ -12,7 +12,6 @@ import "./css/SortingVisualizer.css";
 
 // Some params
 const ORIGINAL_COLOR = "#00bcd4";
-const COMPARING_COLOR = "red";
 const SORTED_COLOR = "#4EC83E";
 
 const MAX_ANIMATION_MS = 100;
